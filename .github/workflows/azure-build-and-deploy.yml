@@ -32,10 +32,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Create Azure Web App if not exists
+    - name: Set Azure Subscription
+      run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Create Azure Web App
       run: |
-        az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name myBlogApp --deployment-container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest || true
+        az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name myBlogApp || true
 
     - name: Configure Azure Web App to use Docker image
       run: |
-        az webapp config container set --name myBlogApp --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
+        az webapp config container set --name myBlogApp --resource-group myResourceGroup --docker-custom-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
