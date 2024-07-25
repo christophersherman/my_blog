@@ -41,4 +41,4 @@ jobs:
 
     - name: Configure Azure Web App to use Docker image
       run: |
-        az webapp config container set --name myBlogApp --resource-group myResourceGroup --docker-custom-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
+        az webapp config container set --name myBlogApp --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
