@@ -1,7 +1,7 @@
 ---
 author: Christopher Sherman 
 pubDatetime: 2024-07-25T09:22:00Z
-modDatetime: 2024-07-25T09:22:00Z
+modDatetime: 2024-07-25T20:53:00Z
 title: CrowdStrike's outage as a Reliability Engineer
 slug: crowdstrike-outage-as-an-sre 
 featured: true

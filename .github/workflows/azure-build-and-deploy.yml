@@ -35,10 +35,18 @@ jobs:
     - name: Set Azure Subscription
       run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: Create Azure Web App
+    - name: Create Linux App Service Plan
       run: |
-        az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name myBlogApp || true
+        az appservice plan create --name myLinuxAppServicePlan --resource-group myResourceGroup --is-linux --sku B1 || true
 
-    - name: Configure Azure Web App to use Docker image
+    - name: Create Linux Web App
       run: |
-        az webapp config container set --name myBlogApp --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
+        az webapp create --resource-group myResourceGroup --plan myLinuxAppServicePlan --name myBlogAppLinux || true
+
+    - name: Configure Linux Web App to use Docker image
+      run: |
+        az webapp config container set --name myBlogAppLinux --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
+
+    - name: Set Web App Settings
+      run: |
+        az webapp config appsettings set --name myBlogAppLinux --resource-group myResourceGroup --settings WEBSITES_PORT=4321
