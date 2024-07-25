@@ -49,4 +49,4 @@ jobs:
 
     - name: Set Web App Settings
       run: |
-        az webapp config appsettings set --name myBlogAppLinux --resource-group myResourceGroup --settings WEBSITES_PORT=4321
+        az webapp config appsettings set --name myBlogAppLinux --resource-group myResourceGroup --settings WEBSITES_PORT=80
