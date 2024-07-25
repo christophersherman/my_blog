@@ -34,8 +34,8 @@ jobs:
 
     - name: Create Azure Web App if not exists
       run: |
-        az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name myUniqueAppName --deployment-container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest || true
+        az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name myBlogApp --deployment-container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest || true
 
     - name: Configure Azure Web App to use Docker image
       run: |
-        az webapp config container set --name myUniqueAppName --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
+        az webapp config container set --name myBlogApp --resource-group myResourceGroup --container-image-name ${{ secrets.ACR_LOGIN_SERVER }}/myblog:latest
